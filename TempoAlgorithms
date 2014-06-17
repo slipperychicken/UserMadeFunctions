@@ -1,0 +1,21 @@
+;;;; As used in "High Atop Spiral Mountain";;;;;;;;;;;;;;;;;;;;
+;;;; Russell Snyder ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Global Acceleration Function
+
+(defun accel (startmm endmm starttempo endtempo rate) 
+  (loop for i from startmm to endmm by rate
+	for j from starttempo to endtempo 
+	by ( / ( - endtempo starttempo) ( / ( - endmm startmm) rate)) 
+	collect (list i (list `q j))))
+
+;; Global Decceleration Function
+
+(defun deccel (startmm endmm starttempo endtempo rate) 
+  (loop for i from startmm to endmm by rate
+	for j from starttempo downto endtempo 
+	by ( / ( - starttempo endtempo) ( / ( - endmm startmm) rate)) 
+	collect (list i (list `q j))))
+	
+;;; Can anybody think of a more efficient way?
+;;; Or how to get exponential growth?
